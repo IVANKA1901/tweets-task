@@ -5,13 +5,11 @@ import { Container, SectionFull } from "./Layout.styled";
 export const Layout = () => {
   return (
     <main>
-      <SectionFull>
-        <Container>
-          <Suspense>
-            <Outlet />
-          </Suspense>
-        </Container>
-      </SectionFull>
+      <Container>
+        <Suspense>
+          <Outlet />
+        </Suspense>
+      </Container>
     </main>
   );
 };

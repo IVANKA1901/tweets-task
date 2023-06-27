@@ -14,6 +14,7 @@ export const HeaderFull = styled.header`
 export const Navigation = styled.nav`
   display: flex;
   justify-content: space-around;
+  padding: 20px 0;
 `;
 
 export const HomeBtn = styled.button`
