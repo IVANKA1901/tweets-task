@@ -47,7 +47,7 @@ export const Tweet = ({ avatar, followers, tweets, id }) => {
   };
 
   const toggleButtonStyle = {
-    backgroundColor: isUserFollow ? "#5CD3A8" : "#EBD8FF",
+    backgroundColor: isFollowing ? "#5CD3A8" : "#EBD8FF",
   };
 
   return (

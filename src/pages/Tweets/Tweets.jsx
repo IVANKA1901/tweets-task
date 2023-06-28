@@ -8,7 +8,11 @@ import { fetchUsers } from "../../redux/operations";
 import { useEffect, useState } from "react";
 import { Tweet } from "../../components/Tweets/Tweets";
 import { Filter } from "../../components/Filter/Filter";
+import { List } from "./Tweets.styled";
 // import { useLocation } from "react-router-dom";
+
+const LIMIT = 3;
+const SKIP = 3;
 
 export const Tweets = () => {
   const dispatch = useDispatch();
@@ -16,24 +20,23 @@ export const Tweets = () => {
   const filter = useSelector(selectedFilter);
   const followsArr = useSelector(selectedFollow);
 
-  const PER_PAGE = 3;
-  const [nextPage, setNextPage] = useState(PER_PAGE);
+  const [nextPage, setNextPage] = useState(1);
   // const location = useLocation();
   // const backLinkRef = useRef(location.state?.from ?? "/");
 
   const follows = followsArr.map((el) => el.id);
-  const handleLoadMore = () => {
-    setNextPage(nextPage + PER_PAGE);
-  };
 
   useEffect(() => {
-    dispatch(fetchUsers());
-  }, [dispatch]);
+    const skip = SKIP * nextPage - LIMIT;
+    users.length === 0 && dispatch(fetchUsers(skip, LIMIT));
+  }, [dispatch, nextPage, users.length]);
+    setNextPage((prev) => prev + 1);
+  };
 
   return (
     <div>
       <Filter />
-      <ul>
+      <List>
         {filter === "following" &&
           users
             .filter((user) => follows.includes(user.id))
@@ -68,8 +71,8 @@ export const Tweets = () => {
               tweets={user.tweets}
             />
           ))}
-      </ul>
-      {nextPage < users.length && (
+      </List>
+      {nextPage <= Math.ceil(users.length / LIMIT) && (
         <button type="button" onClick={handleLoadMore}>
           Load More
         </button>
