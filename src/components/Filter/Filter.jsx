@@ -4,14 +4,11 @@ import { filterOptions } from "./filteredOptions";
 import React from "react";
 import Select from "react-select";
 import { changeFilter } from "../../redux/filterReducer";
+import "./Filter.css";
 
 export const Filter = () => {
   const dispatch = useDispatch();
   const filter = useSelector(selectedFilter);
-
-  const handleChange = (e) => {
-    dispatch(changeFilter(e.value));
-  };
 
   const filteredValue = filterOptions.find((el) => el.value === filter);
 
@@ -21,7 +18,7 @@ export const Filter = () => {
       classNamePrefix="filter"
       options={filterOptions}
       value={filteredValue}
-      onChange={handleChange()}
+      onChange={(e) => dispatch(changeFilter(e.value))}
     />
   );
 };

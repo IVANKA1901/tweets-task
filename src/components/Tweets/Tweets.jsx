@@ -19,6 +19,15 @@ import {
   Tweetss,
 } from "./Tweets.styled";
 
+const format = (value) => {
+  const form = new Intl.NumberFormat("en", {
+    style: "decimal",
+    useGrouping: "false",
+  }).format(value);
+
+  return form;
+};
+
 export const Tweet = ({
   avatar = null,
   followers = null,
@@ -31,7 +40,7 @@ export const Tweet = ({
   const isUserFollow = selectFollowings.some((item) => item?.id === id);
   const [isFollowing, setIsFollowing] = useState(isUserFollow);
 
-  const handleButtonClick = (id, followers) => {
+  const handleClick = (id, followers) => {
     isFollowing && dispatch(deleteFollow());
     !isFollowing && dispatch(addFollow());
 
@@ -61,11 +70,11 @@ export const Tweet = ({
         <img src={ring} alt="background ring" width="80" />
       </Ring>
       <Avatar loading="lazy" src={avatar} alt="avatar" />
-      <Tweetss> Tweets</Tweetss>
-      <Followers> Followers</Followers>
+      <Tweetss>{format(tweets)} Tweets</Tweetss>
+      <Followers>{format(followers)}</Followers>
       <FollowBtn
         type="button"
-        onClick={() => handleButtonClick(id, followers)}
+        onClick={() => handleClick(id, followers)}
         style={toggleButtonStyle}
         disabled={isLoading}
       >

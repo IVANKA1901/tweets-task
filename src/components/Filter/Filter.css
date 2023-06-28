@@ -1,0 +1,55 @@
+.filter-container {
+  width: 50%;
+}
+
+.filter__control {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: linear-gradient(45deg, #43aee3, #217a9f);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: -2.5777px 6.87386px 20.6216px rgba(0, 0, 0, 0.23);
+
+  &:hover {
+    border-color: rgb(0, 110, 169);
+  }
+
+  &--is-focused {
+    border-color: rgb(0, 110, 169);
+  }
+}
+.filter__single-value {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-align: center;
+  color: black;
+}
+.filter__menu {
+  background: linear-gradient(45deg, #43aee3, #217a9f);
+}
+.filter__option {
+  background: linear-gradient(45deg, #43aee3, #217a9f);
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: black;
+  cursor: pointer;
+  text-align: center;
+
+  &:hover {
+    background: linear-gradient(45deg, #10a2eb, #217a9f);
+  }
+
+  &--is-selected {
+    background: linear-gradient(45deg, #10a2eb, #217a9f);
+    color: black;
+  }
+}

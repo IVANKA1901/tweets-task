@@ -23,3 +23,11 @@ export const putUser = createAsyncThunk(
     }
   }
 );
+
+export const getUsersPerPage = (page) => {
+  try {
+    return axios.get(`/users`, { params: { limit: 3, page } });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
