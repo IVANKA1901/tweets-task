@@ -28,12 +28,7 @@ const format = (value) => {
   return form;
 };
 
-export const Tweet = ({
-  avatar = null,
-  followers = null,
-  tweets = null,
-  id = null,
-}) => {
+export const Tweet = ({ avatar, followers, tweets, id }) => {
   const isLoading = useSelector(selectedLoader);
   const selectFollowings = useSelector(selectedFollow);
   const dispatch = useDispatch();
@@ -69,7 +64,7 @@ export const Tweet = ({
       <Ring>
         <img src={ring} alt="background ring" width="80" />
       </Ring>
-      <Avatar loading="lazy" src={avatar} alt="avatar" />
+      <Avatar src={avatar} alt="avatar" />
       <Tweetss>{format(tweets)} Tweets</Tweetss>
       <Followers>{format(followers)}</Followers>
       <FollowBtn

@@ -14,7 +14,7 @@ export const Filter = () => {
 
   return (
     <Select
-      defaultValue={filterOptions[0]}
+      defaultValue={filterOptions}
       classNamePrefix="filter"
       options={filterOptions}
       value={filteredValue}
