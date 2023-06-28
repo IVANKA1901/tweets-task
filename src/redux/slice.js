@@ -28,13 +28,13 @@ const usersSlice = createSlice({
       })
       .addCase(fetchUsers.rejected, handleRejected)
       .addCase(putUser.pending, handlePending)
-      .addCase(putUser.pending, (state, { payload }) => {
+      .addCase(putUser.fulfilled, (state, { payload }) => {
         const index = state.users.findIndex((el) => el.id === payload.id);
         state.users[index] = { ...state.users[index], ...payload };
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(putUser, handleRejected);
+      .addCase(putUser.rejected, handleRejected);
   },
 });
 
