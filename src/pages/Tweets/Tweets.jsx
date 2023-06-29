@@ -6,10 +6,9 @@ import {
 } from "../../redux/selectors";
 import { fetchUsers } from "../../redux/operations";
 import { useEffect, useState } from "react";
-import { Tweet } from "../../components/Tweets/Tweets";
+import { Tweet } from "../../components/Tweet/Tweet";
 import { Filter } from "../../components/Filter/Filter";
-import { List } from "./Tweets.styled";
-// import { useLocation } from "react-router-dom";
+import { List, LoadBtn } from "./Tweets.styled";
 
 const LIMIT = 3;
 const SKIP = 3;
@@ -20,16 +19,26 @@ export const Tweets = () => {
   const filter = useSelector(selectedFilter);
   const followsArr = useSelector(selectedFollow);
 
+  const [visibleUsers, setVisibleUsers] = useState([]);
   const [nextPage, setNextPage] = useState(1);
-  // const location = useLocation();
-  // const backLinkRef = useRef(location.state?.from ?? "/");
 
   const follows = followsArr.map((el) => el.id);
 
+  // console.log(follows);
+
   useEffect(() => {
     const skip = SKIP * nextPage - LIMIT;
-    users.length === 0 && dispatch(fetchUsers(skip, LIMIT));
-  }, [dispatch, nextPage, users.length]);
+    if (users.length === 0) {
+      dispatch(fetchUsers(skip, LIMIT));
+    } else {
+      const startIndex = (nextPage - 1) * LIMIT;
+      const endIndex = startIndex + LIMIT;
+      const newVisibleUsers = users.slice(startIndex, endIndex);
+      setVisibleUsers((prev) => [...prev, ...newVisibleUsers]);
+    }
+  }, [dispatch, nextPage, users, users.length]);
+
+  const handleLoadMore = () => {
     setNextPage((prev) => prev + 1);
   };
 
@@ -38,7 +47,7 @@ export const Tweets = () => {
       <Filter />
       <List>
         {filter === "following" &&
-          users
+          visibleUsers
             .filter((user) => follows.includes(user.id))
             .map((user) => (
               <Tweet
@@ -50,7 +59,7 @@ export const Tweets = () => {
               />
             ))}
         {filter === "follow" &&
-          users
+          visibleUsers
             .filter((user) => !follows.includes(user.id))
             .map((user) => (
               <Tweet
@@ -62,8 +71,8 @@ export const Tweets = () => {
               />
             ))}
         {(filter === "all" || filter === "") &&
-          users.map((user) => (
-            <Tweets
+          visibleUsers.map((user) => (
+            <Tweet
               key={user.id}
               id={user.id}
               avatar={user.avatar}
@@ -72,10 +81,10 @@ export const Tweets = () => {
             />
           ))}
       </List>
-      {nextPage <= Math.ceil(users.length / LIMIT) && (
-        <button type="button" onClick={handleLoadMore}>
+      {visibleUsers.length < users.length && (
+        <LoadBtn type="button" onClick={handleLoadMore}>
           Load More
-        </button>
+        </LoadBtn>
       )}
     </div>
   );

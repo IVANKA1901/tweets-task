@@ -17,15 +17,10 @@ import {
   LogoCont,
   Ring,
   Tweetss,
-} from "./Tweets.styled";
+} from "./Tweet.styled";
 
 const format = (value) => {
-  const form = new Intl.NumberFormat("en", {
-    style: "decimal",
-    useGrouping: "false",
-  }).format(value);
-
-  return form;
+  return value.toLocaleString("en");
 };
 
 export const Tweet = ({ avatar, followers, tweets, id }) => {
@@ -33,6 +28,7 @@ export const Tweet = ({ avatar, followers, tweets, id }) => {
   const selectFollowings = useSelector(selectedFollow);
   const dispatch = useDispatch();
   const isUserFollow = selectFollowings.some((item) => item?.id === id);
+
   const [isFollowing, setIsFollowing] = useState(isUserFollow);
 
   const handleClick = (id, followers) => {
