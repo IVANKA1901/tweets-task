@@ -10,8 +10,8 @@ import { Tweet } from "../../components/Tweet/Tweet";
 import { Filter } from "../../components/Filter/Filter";
 import { List, LoadBtn } from "./Tweets.styled";
 
-const LIMIT = 3;
-const SKIP = 3;
+// const LIMIT = 3;
+// const SKIP = 3;
 
 export const Tweets = () => {
   const dispatch = useDispatch();
@@ -19,27 +19,19 @@ export const Tweets = () => {
   const filter = useSelector(selectedFilter);
   const followsArr = useSelector(selectedFollow);
 
-  const [visibleUsers, setVisibleUsers] = useState([]);
-  const [nextPage, setNextPage] = useState(1);
+  const [nextPage, setNextPage] = useState(3);
+  const usersSlice = users.slice(0, nextPage);
 
   const follows = followsArr.map((el) => el.id);
 
   // console.log(follows);
 
   useEffect(() => {
-    const skip = SKIP * nextPage - LIMIT;
-    if (users.length === 0) {
-      dispatch(fetchUsers(skip, LIMIT));
-    } else {
-      const startIndex = (nextPage - 1) * LIMIT;
-      const endIndex = startIndex + LIMIT;
-      const newVisibleUsers = users.slice(startIndex, endIndex);
-      setVisibleUsers((prev) => [...prev, ...newVisibleUsers]);
-    }
-  }, [dispatch, nextPage, users, users.length]);
+    dispatch(fetchUsers());
+  }, [dispatch]);
 
   const handleLoadMore = () => {
-    setNextPage((prev) => prev + 1);
+    setNextPage(nextPage + nextPage);
   };
 
   return (
@@ -47,7 +39,7 @@ export const Tweets = () => {
       <Filter />
       <List>
         {filter === "following" &&
-          visibleUsers
+          usersSlice
             .filter((user) => follows.includes(user.id))
             .map((user) => (
               <Tweet
@@ -59,7 +51,7 @@ export const Tweets = () => {
               />
             ))}
         {filter === "follow" &&
-          visibleUsers
+          usersSlice
             .filter((user) => !follows.includes(user.id))
             .map((user) => (
               <Tweet
@@ -71,7 +63,7 @@ export const Tweets = () => {
               />
             ))}
         {(filter === "all" || filter === "") &&
-          visibleUsers.map((user) => (
+          usersSlice.map((user) => (
             <Tweet
               key={user.id}
               id={user.id}
@@ -81,8 +73,8 @@ export const Tweets = () => {
             />
           ))}
       </List>
-      {visibleUsers.length < users.length && (
-        <LoadBtn type="button" onClick={handleLoadMore}>
+      {usersSlice.length < users.length && (
+        <LoadBtn type="button" onClick={() => handleLoadMore()}>
           Load More
         </LoadBtn>
       )}
