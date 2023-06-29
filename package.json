@@ -1,7 +1,7 @@
 {
   "name": "tweets-task",
   "version": "0.1.0",
-  "homepage": "https://IVANKA1901.github.io/tweets-task",
+  "homepage": "https://IVANKA1901.github.io/tweets-task/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
