@@ -5,10 +5,10 @@ export const Header = () => {
   return (
     <HeaderFull>
       <Navigation>
-        <NavLink to="/">
+        <NavLink to="/tweets-task">
           <HomeBtn>Home</HomeBtn>
         </NavLink>
-        <NavLink to="/tweets">
+        <NavLink to="tweets-task/tweets">
           <TweetBtn>Tweets</TweetBtn>
         </NavLink>
       </Navigation>
