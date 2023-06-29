@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import { Tweet } from "../../components/Tweet/Tweet";
 import { Filter } from "../../components/Filter/Filter";
 import { Back, BackCont, Descr, List, LoadBtn } from "./Tweets.styled";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
 
 // const LIMIT = 3;
