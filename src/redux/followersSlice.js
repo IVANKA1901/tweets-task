@@ -1,14 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  follows: [],
-};
-
 const followSlice = createSlice({
   name: "follow",
-  initialState,
+  initialState: { follows: [] },
   reducers: {
     addFollow(state, { payload: id }) {
+      // console.log(payload);
       state.follows.push({ id });
     },
     deleteFollow(state, { payload: id }) {

@@ -32,8 +32,8 @@ export const Tweet = ({ avatar, followers, tweets, id }) => {
   const [isFollowing, setIsFollowing] = useState(isUserFollow);
 
   const handleClick = (id, followers) => {
-    isFollowing && dispatch(deleteFollow());
-    !isFollowing && dispatch(addFollow());
+    isFollowing && dispatch(deleteFollow(id));
+    !isFollowing && dispatch(addFollow(id));
 
     dispatch(
       putUser({ id, followers: isFollowing ? followers - 1 : followers + 1 })
