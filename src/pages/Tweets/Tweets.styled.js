@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+export const ContainerCards = styled.div`
+  display: flex;
+  margin: 0 auto;
+  max-width: 1000px;
+`;
 export const List = styled.ul`
   margin: 0;
   padding-left: 0;
