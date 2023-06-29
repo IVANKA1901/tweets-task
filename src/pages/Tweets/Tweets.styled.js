@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const List = styled.ul`
@@ -9,6 +10,8 @@ export const List = styled.ul`
   gap: 35px;
   row-gap: 35px;
   margin-top: 120px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const LoadBtn = styled.button`
@@ -29,4 +32,22 @@ export const LoadBtn = styled.button`
   &:focus {
     transform: scale(1.1);
   }
+`;
+
+export const Back = styled(Link)``;
+
+export const BackCont = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+  padding: 20px 10px;
+  width: fit-content;
+  border-radius: 15px;
+`;
+
+export const Descr = styled.p`
+  color: black;
+  font-size: 24px;
+  font-weight: 600;
 `;

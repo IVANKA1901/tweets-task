@@ -5,10 +5,12 @@ import {
   selectedUsers,
 } from "../../redux/selectors";
 import { fetchUsers } from "../../redux/operations";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Tweet } from "../../components/Tweet/Tweet";
 import { Filter } from "../../components/Filter/Filter";
-import { List, LoadBtn } from "./Tweets.styled";
+import { Back, BackCont, Descr, List, LoadBtn } from "./Tweets.styled";
+import { Link, useLocation } from "react-router-dom";
+import { BsArrowLeft } from "react-icons/bs";
 
 // const LIMIT = 3;
 // const SKIP = 3;
@@ -18,6 +20,9 @@ export const Tweets = () => {
   const users = useSelector(selectedUsers);
   const filter = useSelector(selectedFilter);
   const followsArr = useSelector(selectedFollow);
+
+  const location = useLocation();
+  const backLink = useRef(location.state?.from ?? "/");
 
   const [nextPage, setNextPage] = useState(3);
   const usersSlice = users.slice(0, nextPage);
@@ -36,6 +41,14 @@ export const Tweets = () => {
 
   return (
     <div>
+      {backLink && (
+        <Back to={backLink.current}>
+          <BackCont>
+            <BsArrowLeft style={{ width: "50px", height: "35px" }} />
+            <Descr>Go Back</Descr>
+          </BackCont>
+        </Back>
+      )}
       <Filter />
       <List>
         {filter === "following" &&

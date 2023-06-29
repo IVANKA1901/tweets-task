@@ -5,11 +5,12 @@ export const Item = styled.li`
   flex-direction: column;
   align-items: center;
   position: relative;
-  max-width: calc((100% - 76px) / 3);
+  width: 377px;
+  max-width: calc((100% - 71px) / 3);
+
   transition: all 250ms;
-  width: 380px;
   padding-top: 214px;
-  width: 100%;
+  /* width: 100%; */
   padding-bottom: 36px;
   background: linear-gradient(
     114.99deg,
