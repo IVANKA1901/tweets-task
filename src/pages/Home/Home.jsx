@@ -5,7 +5,7 @@ export const Home = () => {
 
   return (
     <Container>
-      <Descr>Welcome to your tweet home page!</Descr>
+      <Descr>Welcome to your tweet home page !</Descr>
       <img src={tweet} alt="Tweet" width="540" height="360" />
     </Container>
   );
